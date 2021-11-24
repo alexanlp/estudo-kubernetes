@@ -8,7 +8,9 @@ Pod não tem resiliência, ou seja, se cair não cria outra instancia do pod
 
 ## Comandos
 Criar o pod: ```kubectl apply -f pod.yaml```
+
 Descobrir sobre o pod: ```kubectl describe pod``` (para listar todos os pods do namespace)
+
 Descobrir sobre o pod **(específico)**: ``` kubectl describe pod <nome do pod> ```
 
 ## Bind de porta Host para Pod
