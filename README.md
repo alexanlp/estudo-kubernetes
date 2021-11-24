@@ -88,11 +88,11 @@ Cria uma separação lógica dentro do cluster. Serve por exemplo para separar a
 [Documentação](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 
 ## Comandos
-**Listar namespaces:** ```kubectl get namespaces```
-**Listar deployments em um namespace:** ```kubectl get deployments -n <namespace>```
-**Listar todos os deployments:** ```kubectl get deployments --all-namespaces```
-**Fazendo o deploy especificando o namespace:** ```kubectl apply -f <arquivo>.yaml -n <namespace>```
-**Criar namespace após o deploy**: ```kubectl create namespace <namespace>```
+**Listar namespaces:** ```kubectl get namespaces```&nbsp;
+**Listar deployments em um namespace:** ```kubectl get deployments -n <namespace>```&nbsp;
+**Listar todos os deployments:** ```kubectl get deployments --all-namespaces```&nbsp;
+**Fazendo o deploy especificando o namespace:** ```kubectl apply -f <arquivo>.yaml -n <namespace>```&nbsp;
+**Criar namespace após o deploy**: ```kubectl create namespace <namespace>```&nbsp;
 **Criar namespace no yaml:** definir o namespace no metadata
 
 ## Comunicação entre namespaces (Externamente)
