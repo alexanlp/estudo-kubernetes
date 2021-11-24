@@ -68,25 +68,27 @@ No rollback o deployment aproveita o replicaset anterior, com isso não faz novo
 **Para voltar para a versão atual novamente:** ```kubectl image deployment <nome do deployment> <nome do container>=<imagem>```
 
 # Objetos Services
-[Introdução](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/expose/expose-intro/)
-
-[Documentção](https://kubernetes.io/docs/concepts/services-networking/service/)
+[Introdução](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/expose/expose-intro/) | [Documentção](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 ## ClusterIP
 Serve para gerar conexão entre os pods **dentro** do cluster (nada externo).
+
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
 
 
 ## NodePort
 Gera comunicação com um porta externa de 30000 a 32767.
+
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
 
 ## LoadBalancer
 Utiliza o provedor para obter um IP (só funciona em ambiente cloud). Utilizado em serviços de cloud.
+
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
 
 ## ExternalName
 Para gerar um padronização com o meio externo. Tipo DNS.
+
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#externalname)
 
 
@@ -100,6 +102,7 @@ Esses são criados de forma automática, mas tem como criar manualmente também.
 
 # Namespaces
 Cria uma separação lógica dentro do cluster. Serve por exemplo para separar ambientes (DEV, QA etc)
+
 [Documentação](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 
 ## Comandos
