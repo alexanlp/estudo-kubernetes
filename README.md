@@ -18,22 +18,29 @@ Descobrir sobre o pod **(específico)**: ``` kubectl describe pod <nome do pod> 
 
 # Labels e Selectors
 **Label:** Elementos chave/valor junto com metadata do objeto (versão, autor etc)
+
 **Selectors:** Selecionar objetos baseados nos labels definidos
 
 ## Comandos
 **Selecionar um pod:** ```kubectl get pods -l versao=1```
+
 **Deletar um pod com seletor:** ```kubectl delete pod -l versao=1```
 
 # Replicaset
 Garante a quantidade de réplicas que deseja (escalabilidade e resiliência), que garanta o estado da aplicação com as réplicas necessárias.
 
 [Documentação](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+
 ## Comandos
 **Criar o replicaset:** ```kubectl apply -f replicaset.yaml```
+
 **Saber o estado do replicaset:** ```kubectl get replicaset```
+
 **Descobrir sobre o replicaset:** ```kubectl describe replicaset``` (para listar todos os pods do namespace)
 
-**Resiliência:** Deletando o pod criado com replicaset, automaticamente será criado outro
+
+**Resiliência:** Deletando o pod criado com replicaset, automaticamente será criado outro.
+
 Comando: ```kubectl delete pod <nome do pod>```
 
 **Escalabilidade:** ```kubectl scale replicaset <nome do pod> --replicas=2```
@@ -46,11 +53,15 @@ Gerencia os replicasets. Os deployments guarda o histórico dos replicasets, com
 
 ## Comandos
 Criar o deployment: ```kubectl apply -f arquivo.yaml```
+
 Saber o estado do deployment: ```kubectl get deployment```
+
 Descobrir sobre o deployment: ```kubectl describe deployment``` (para listar todos os pods do namespace)
 
 **Para ver as versões:** ```kubectl rollout history deployment <nome do deployment>```
+
 **Para fazer rollback para a versão anterior:** ```kubectl rollout undo reployment <nome do deployment>```
+
 
 No rollback o deployment aproveita o replicaset anterior, com isso não faz novo deploy.
 
@@ -58,6 +69,7 @@ No rollback o deployment aproveita o replicaset anterior, com isso não faz novo
 
 # Objetos Services
 [Introdução](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/expose/expose-intro/)
+
 [Documentção](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 ## ClusterIP
@@ -77,6 +89,7 @@ Utiliza o provedor para obter um IP (só funciona em ambiente cloud). Utilizado 
 Para gerar um padronização com o meio externo. Tipo DNS.
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#externalname)
 
+
 # End Points
 Entre o service e o pod, quando cria um service e usa os selectors para vincular ao pod, outro objeto também é
 criado por debaixo dos panos, esse objeto é o Endpoint. Nada mais é do que uma cloeção com todos os pods que são vinculados a esse service.
@@ -90,16 +103,23 @@ Cria uma separação lógica dentro do cluster. Serve por exemplo para separar a
 [Documentação](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 
 ## Comandos
-**Listar namespaces:** ```kubectl get namespaces```&nbsp;
-**Listar deployments em um namespace:** ```kubectl get deployments -n <namespace>```&nbsp;
-**Listar todos os deployments:** ```kubectl get deployments --all-namespaces```&nbsp;
-**Fazendo o deploy especificando o namespace:** ```kubectl apply -f <arquivo>.yaml -n <namespace>```&nbsp;
-**Criar namespace após o deploy**: ```kubectl create namespace <namespace>```&nbsp;
+**Listar namespaces:** ```kubectl get namespaces```
+
+**Listar deployments em um namespace:** ```kubectl get deployments -n <namespace>```
+
+**Listar todos os deployments:** ```kubectl get deployments --all-namespaces```
+
+**Fazendo o deploy especificando o namespace:** ```kubectl apply -f <arquivo>.yaml -n <namespace>```
+
+**Criar namespace após o deploy**: ```kubectl create namespace <namespace>```
+
 **Criar namespace no yaml:** definir o namespace no metadata
 
 ## Comunicação entre namespaces (Externamente)
 Em um arquivo de service.yaml e aplicar o manifesto nos namespaces.
+
 ```kubectl apply -f service.yaml -n <namespace>```
+
 Fazer isso para todos os namespaces desejados.
 
 ## Comunicação entre namespaces (entre pods)
