@@ -1,3 +1,79 @@
+# Introdução ao Linux
+## Principais diretórios
+**'/' (Raíz)** Tipo c:
+**/home** Diretório de trabalho dos usuários
+**/root** Diretório de trabalho do super usuário
+**/bin** Onde ficam os principais comandos do linux (cat, su, rm, pwd etc)
+**/lib** Bibliotecas essenciais compartilhadas pelos programas e módulos do kernel
+**/usr** É onde a maioria dos programas são instalados, normalmente usado com acesso apenas de leitura
+**/boot** Arquivos estáticos de gerenciamento de inicialização do SO
+**/etc** Arquivos de configuração e scripts de inicialização
+**/sbin** Diretório de programas utilizados pelo usuário root
+**/tmp** Arquivos temporários
+**/var** Dados variáveis como log, dados de administração do sistema, login e arquivos transitórios
+**/opt** Aplicativos adicionais e pacotes de software
+**/dev** Referência dos dispositivos (hardware)
+**/mnt** Pont de montagem para montar um sistema de arquivos temporariamente
+
+## Comandos Básicos
+**uname** Retorna informações sobre o kernel do SO 
+**free** Dados de consumo de memória
+**shudown** Reinicia e desilga a máquina
+**man** Exibe o manual do comando, por exemplo ```man sudo```
+
+## Trabalhar com arquivos e diretórios
+**mkdir -p** Criar toda a árvore desejada 'pasta1/pasta2/pastafinal'
+**head <arquivo>** Mostra o início do arquivo
+**head <arquivo> -n 2** Limita mais ainda o tamanho
+**tail <arquivo>** Mostra o final do arquivo
+**tail <arquivo> -n 2** Limita mais ainda o resultado
+**more <arquivo>** Mostra parte do arquivo e pode mover com a seta para ir até o final do arquivo
+**less <arquivo>** Mesma coisa, mas movimenta com page up e page down
+**grep <texto da busca> <arquivo>** Traz os trechos onde encontrou a ocorrência
+**grep -n <texto da busca> <arquivo>** Traz o número da lina também
+**grep -n -i <texto da busca> <arquivo>** Faz a busca sem diferenciar maiúsculas e minúsculas
+
+## Execução de comandos, Redirecionamentos e Pipes
+**|** Faz a junção de arquivos, por exemplo:
+
+```ls -l | grep <texto>``` Filtra o resultado e e traz apenas arquivo com o termo buscado no nome
+
+```ls -l > saida.txt``` Gera o resultado do comando em um arquivo (não traz nada no console)
+
+```ls -a >> saida.txt``` Concatena com o resultado anterior no mesmo arquivo
+
+### Redirecionamento
+```mkdir pasta1/pasta2 2> erro.txt``` Gera a saída do erro para um arquivo.txt
+
+## Gerenciamento de Pacotes
+**DPKG** para distribuições baseadas em Debian e (arquivos .deb) **RPM** para distribuições baseadas no RedHat (arquivos .rpm)
+
+### Instalação com download de arquivos
+Instalar um aplicativo: ```sudo dpkg -i arquivo.deb```
+
+Desinstalar um aplicativo: ```sudo dpkg -r <aplicativo>```
+
+### Instalação sem download de arquivos
+Atualizar a lista de repositórios ```sudo apt update```
+
+Instalar um aplicativo ```sudo apt install <aplicativo>```
+
+## Gerenciamento de Processos
+Listar processos em execução: 
+```ps -a``` Processos criados por todos oso usuário
+
+Listar processos em execução com o PID: 
+```ps -aux``` Processos criados por todos oso usuário
+
+## SSH
+Acesso com par de chaves, criar chave pública (atua como cadeado e vai para o servidor) e uma privada (fica na máquina).
+
+```ssh-keygen -t rsa -b 2048```
+ Na pasta  ~/.ssh/, pegar o conteúdo do aquivo .pub e registrar nas configurações de segurança no painel da aws, azure etc.
+ Com isso vai utilizar a chave privada para validar com a chave pública
+
+ ```ssh -i <path e arquivo da chave privada> user@IP```
+
 # Pod
 É o menor objeto do cluster kubernetes. É no pod que executamos os containers. Podemos ter mais de um container dentro de um pod.
 Mas não é o correto, porque quando escalar um container vai estar escalando todo o pod.
