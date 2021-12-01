@@ -47,7 +47,7 @@
 **grep -n -i <texto da busca> <arquivo>** Faz a busca sem diferenciar maiúsculas e minúsculas
 
 ## Execução de comandos, Redirecionamentos e Pipes
-**|** Faz a junção de arquivos, por exemplo:
+**'|'** Faz a junção de arquivos, por exemplo:
 
 ```ls -l | grep <texto>``` Filtra o resultado e e traz apenas arquivo com o termo buscado no nome
 
@@ -82,8 +82,8 @@ Listar processos em execução com o PID:
 Acesso com par de chaves, criar chave pública (atua como cadeado e vai para o servidor) e uma privada (fica na máquina).
 
 ```ssh-keygen -t rsa -b 2048```
- Na pasta  ~/.ssh/, pegar o conteúdo do aquivo .pub e registrar nas configurações de segurança no painel da aws, azure etc.
- Com isso vai utilizar a chave privada para validar com a chave pública
+
+ Na pasta  ~/.ssh/, pegar o conteúdo do aquivo .pub e registrar nas configurações de segurança no painel da aws, azure etc. Com isso vai utilizar a chave privada para validar com a chave pública
 
  ```ssh -i <path e arquivo da chave privada> user@IP```
 
