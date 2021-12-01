@@ -1,18 +1,31 @@
 # Introdução ao Linux
 ## Principais diretórios
 **'/' (Raíz)** Tipo c:
+
 **/home** Diretório de trabalho dos usuários
+
 **/root** Diretório de trabalho do super usuário
+
 **/bin** Onde ficam os principais comandos do linux (cat, su, rm, pwd etc)
+
 **/lib** Bibliotecas essenciais compartilhadas pelos programas e módulos do kernel
+
 **/usr** É onde a maioria dos programas são instalados, normalmente usado com acesso apenas de leitura
+
 **/boot** Arquivos estáticos de gerenciamento de inicialização do SO
+
 **/etc** Arquivos de configuração e scripts de inicialização
+
 **/sbin** Diretório de programas utilizados pelo usuário root
+
 **/tmp** Arquivos temporários
+
 **/var** Dados variáveis como log, dados de administração do sistema, login e arquivos transitórios
+
 **/opt** Aplicativos adicionais e pacotes de software
+
 **/dev** Referência dos dispositivos (hardware)
+
 **/mnt** Pont de montagem para montar um sistema de arquivos temporariamente
 
 ## Comandos Básicos
