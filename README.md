@@ -95,7 +95,21 @@ Mas não é o correto, porque quando escalar um container vai estar escalando to
 
 Todos os containers compartilham a mesma rede do pod.
 
-Pod não tem resiliência, ou seja, se cair não cria outra instancia do pod
+Pod não tem resiliência, ou seja, se cair não cria outra instancia do pod.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: meupod
+  labels:
+    app: nginx
+    versao: "1"
+spec:
+  containers:
+    - name: meucontainer
+      image: nginx      
+```
 
 ### Comandos
 Criar o pod: ```kubectl apply -f pod.yaml```
