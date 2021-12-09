@@ -87,7 +87,9 @@ Acesso com par de chaves, criar chave pública (atua como cadeado e vai para o s
 
  ```ssh -i <path e arquivo da chave privada> user@IP```
 
-# Pod
+# Kubernetes
+
+## Pod
 É o menor objeto do cluster kubernetes. É no pod que executamos os containers. Podemos ter mais de um container dentro de um pod.
 Mas não é o correto, porque quando escalar um container vai estar escalando todo o pod.
 
@@ -95,32 +97,32 @@ Todos os containers compartilham a mesma rede do pod.
 
 Pod não tem resiliência, ou seja, se cair não cria outra instancia do pod
 
-## Comandos
+### Comandos
 Criar o pod: ```kubectl apply -f pod.yaml```
 
 Descobrir sobre o pod: ```kubectl describe pod``` (para listar todos os pods do namespace)
 
 Descobrir sobre o pod **(específico)**: ``` kubectl describe pod <nome do pod> ```
 
-## Bind de porta Host para Pod
+### Bind de porta Host para Pod
 ``` kubectl port-forward pod/<nome do pod> 8080:80``` 
 
-# Labels e Selectors
+## Labels e Selectors
 **Label:** Elementos chave/valor junto com metadata do objeto (versão, autor etc)
 
 **Selectors:** Selecionar objetos baseados nos labels definidos
 
-## Comandos
+### Comandos
 **Selecionar um pod:** ```kubectl get pods -l versao=1```
 
 **Deletar um pod com seletor:** ```kubectl delete pod -l versao=1```
 
-# Replicaset
+## Replicaset
 Garante a quantidade de réplicas que deseja (escalabilidade e resiliência), que garanta o estado da aplicação com as réplicas necessárias.
 
 [Documentação](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
 
-## Comandos
+### Comandos
 **Criar o replicaset:** ```kubectl apply -f replicaset.yaml```
 
 **Saber o estado do replicaset:** ```kubectl get replicaset```
@@ -137,10 +139,10 @@ Pode especificar no arquivo do manifesto a quantidade de réplicas dentro da se�
 
 **IMPORTANTE:** O Replicaset não gerencia a troca de versões dos containers. Para que ele consiga fazer a atualização para a nova versão, precisa deletar o(s) pod(s).
 
-# Deployment
+## Deployment
 Gerencia os replicasets. Os deployments guarda o histórico dos replicasets, com isso pode-se fazer rollback
 
-## Comandos
+### Comandos
 Criar o deployment: ```kubectl apply -f arquivo.yaml```
 
 Saber o estado do deployment: ```kubectl get deployment```
@@ -156,32 +158,32 @@ No rollback o deployment aproveita o replicaset anterior, com isso não faz novo
 
 **Para voltar para a versão atual novamente:** ```kubectl image deployment <nome do deployment> <nome do container>=<imagem>```
 
-# Objetos Services
+## Objetos Services
 [Introdução](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/expose/expose-intro/) | [Documentção](https://kubernetes.io/docs/concepts/services-networking/service/)
 
-## ClusterIP
+### ClusterIP
 Serve para gerar conexão entre os pods **dentro** do cluster (nada externo).
 
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
 
 
-## NodePort
+### NodePort
 Gera comunicação com um porta externa de 30000 a 32767.
 
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
 
-## LoadBalancer
+### LoadBalancer
 Utiliza o provedor para obter um IP (só funciona em ambiente cloud). Utilizado em serviços de cloud.
 
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
 
-## ExternalName
+### ExternalName
 Para gerar um padronização com o meio externo. Tipo DNS.
 
 [Documentação](https://kubernetes.io/docs/concepts/services-networking/service/#externalname)
 
 
-# End Points
+## End Points
 Entre o service e o pod, quando cria um service e usa os selectors para vincular ao pod, outro objeto também é
 criado por debaixo dos panos, esse objeto é o Endpoint. Nada mais é do que uma cloeção com todos os pods que são vinculados a esse service.
 
@@ -189,12 +191,12 @@ Esses são criados de forma automática, mas tem como criar manualmente também.
 
 ```kubectl get endpoints```
 
-# Namespaces
+## Namespaces
 Cria uma separação lógica dentro do cluster. Serve por exemplo para separar ambientes (DEV, QA etc)
 
 [Documentação](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 
-## Comandos
+### Comandos
 **Listar namespaces:** ```kubectl get namespaces```
 
 **Listar deployments em um namespace:** ```kubectl get deployments -n <namespace>```
@@ -207,28 +209,28 @@ Cria uma separação lógica dentro do cluster. Serve por exemplo para separar a
 
 **Criar namespace no yaml:** definir o namespace no metadata
 
-## Comunicação entre namespaces (Externamente)
+### Comunicação entre namespaces (Externamente)
 Em um arquivo de service.yaml e aplicar o manifesto nos namespaces.
 
 ```kubectl apply -f service.yaml -n <namespace>```
 
 Fazer isso para todos os namespaces desejados.
 
-## Comunicação entre namespaces (entre pods)
-### Abordagem por IP 
+### Comunicação entre namespaces (entre pods)
+#### Abordagem por IP 
 Listar os pods para pegar o IP
 ```kubectl get pods --all-namespaces -o wide``` e acessar com o IP de dentro de um pod através do IP listado
 
-### Abordagem por nome de service
+#### Abordagem por nome de service
 ```http://<nome do service>.<namespace>.svc.cluster.local```
 
-### Simplicando a comunicação
+#### Simplicando a comunicação
 Criar um service do tipo 'ExternalName' e colocar da propriedade externalName do 'spec' o nome utilizado acima, mas sem http. Repetir isso para cada namespace.
 
-### O que é separado por namespaces e o que não é ?
+#### O que é separado por namespaces e o que não é ?
 ```kubectl api-resources --namespaced=true``` vai listar todos os tipos que podem ser separados por namespace
 
-# Subindo uma aplicação
+## Subindo uma aplicação
 1. git clone da aplicação
 2. Ter um Dockerfile de criação da imagem
 3. Criação da imagem
