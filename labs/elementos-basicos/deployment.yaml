@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: meudeployment
+  name: deploymentwebapp1
 spec:
-  replicas: 8
+  replicas: 3
   selector:
     matchLabels: 
-      app: exemplo
+      app: webapp1
   template:
     metadata:
       labels:
-        app: exemplo
+        app: webapp1
     spec:
       containers:
-        - name: meucontainer
-          image: nginx
+        - name: webapp1
+          image: alexanlp/webapp1:2.0
 

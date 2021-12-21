@@ -118,6 +118,8 @@ Descobrir sobre o pod: ```kubectl describe pod``` (para listar todos os pods do 
 
 Descobrir sobre o pod **(específico)**: ``` kubectl describe pod <nome do pod> ```
 
+Deletar um pod: ```kubectl delete pod <nome do pod>```
+
 ### Bind de porta Host para Pod
 ``` kubectl port-forward pod/<nome do pod> 8080:80``` 
 
@@ -170,7 +172,18 @@ Descobrir sobre o deployment: ```kubectl describe deployment``` (para listar tod
 
 No rollback o deployment aproveita o replicaset anterior, com isso não faz novo deploy.
 
-**Para voltar para a versão atual novamente:** ```kubectl image deployment <nome do deployment> <nome do container>=<imagem>```
+**Para voltar para a versão atual novamente:** ```kubectl set image deployment <nome do deployment> <nome do container>=<imagem>```
+
+### R E S U M Ã O (Pod, ReplicaSet e Deployment)
+O **Pod** é o menor elemento do cluster. Nele podeos ter um ou mais containers. Rodar mais de um container é para o caso de o container principal precisar de aplicações de apoio (por exemplo, coleta de log em arquivos gravado pelo container principal do pod), mas geralmente é utilizado um container por pod.
+
+O **Pod** por si só não tem resiliência, ao excluir um pod ele não será recriado automaticamente, para isso usamos o **ReplicaSet**. É ele que gerencia os pods e permite criar replicas dos pods. O Replicaset também dá resiliência, pois ao deletar um pod ele sobe outro automaticamente, mantendo sempre as replicas solicitadas na sua criação.
+
+O **RepplicaSet** não gerencia atualizações de verssão dos pods de forma automática, para isso utilizamos o **Deployment**. Com o deployment, a cada nova versão ele faz a troca automática da versão antiga pela nova, mantendo a quantidade de réplicas solicitadas na sua criação.
+
+O **Deployment** persiste as versões já atualizadas permitindo assim fazer um rollback para versões anteriores, sem fazer um novo deployment.
+
+
 
 ## Objetos Services
 [Introdução](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/expose/expose-intro/) | [Documentção](https://kubernetes.io/docs/concepts/services-networking/service/)

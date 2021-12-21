@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata: 
-  name: meupod
+  name: podlab
   labels:
-    app: nginx
+    app: webapp
     versao: "1"
-spec:
+spec:  
   containers:
-    - name: meucontainer
-      image: nginx
+  - name: webapp1
+    image: alexanlp/webapp1:latest

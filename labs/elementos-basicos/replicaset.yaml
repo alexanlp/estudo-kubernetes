@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: meureplicaset  
+  name: replicasetwebapp1  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: webapp1
   template:
     metadata: 
       labels:
-        app: nginx
+        app: webapp1
     spec:
       containers:
-        - name: meucontainer
-          image: nginx 
+        - name: webapp1
+          image: alexanlp/webapp1 
